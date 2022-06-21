@@ -1,7 +1,5 @@
 from django.contrib.auth.models import AbstractUser
 from django.db import models
-
-# Create your models here.
 from django.db.models import BigAutoField
 
 
@@ -14,12 +12,13 @@ class Branch(models.Model):
     phone_number = models.CharField(max_length=16, null=True, blank=True, verbose_name='Phone Number')
     email_address = models.EmailField(max_length=254, null=True, blank=True, verbose_name='Email Address')
     pst_number = models.CharField(max_length=50, null=True, blank=True, verbose_name='PST Number')
+    gst_number = models.CharField(max_length=50, null=True, blank=True, verbose_name='GST Number')
     dealer_number = models.CharField(max_length=50, null=True, blank=True, verbose_name='Dealer Number')
     percent_pst = models.DecimalField(max_digits=8, decimal_places=2, default=6.0, verbose_name="PST (%)")
     percent_gst = models.DecimalField(max_digits=8, decimal_places=2, default=5.0, verbose_name="GST (%)")
 
     def __str__(self):
-        return "%s" % self.city
+        return f'{self.location_code}'
 
     class Meta:
         verbose_name_plural = "Branches"

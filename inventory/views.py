@@ -2,5 +2,5 @@ from django.http import HttpResponse
 from django.shortcuts import render
 
 
-def inventory_overview(request):
-    return HttpResponse("Work in progress.")
+def view_inventory(request):
+    return render(request, 'inventory/overview.html')

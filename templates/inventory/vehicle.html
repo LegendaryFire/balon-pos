@@ -6,6 +6,15 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
     <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+        <style>
+        .nav-item button {
+            width: 100%;
+        }
+
+        label, span.select2 {
+            width: 100% !important;
+        }
+    </style>
 {% endblock template_head %}
 
 {% block content %}
@@ -35,7 +44,7 @@
                         {% crispy vehicle_form %}
                     </div>
                     <div class="tab-pane fade" id="purchase" role="tabpanel" aria-labelledby="purchase-tab">
-
+                        {% crispy purchase_form %}
                     </div>
                     <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sales-tab">
 
@@ -48,9 +57,5 @@
 {% endblock content %}
 
 {% block template_body %}
-    <style>
-        .nav-item button {
-            width: 100%;
-        }
-    </style>
+
 {% endblock template_body %}

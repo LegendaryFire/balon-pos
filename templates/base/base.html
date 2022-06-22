@@ -19,9 +19,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap" rel="stylesheet">
     <link href="{% static 'base/css/style.css' %}" rel="stylesheet">
 
-    <!-- jQuery used only for Select2 -->
-    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script>
-
     <!-- Anything loaded here is for template specific style/scripts -->
     {% block template_head %}{% endblock %}
 </head>
@@ -78,7 +75,7 @@
 
                             {% if perms.inventory.add_vehicle %}
                                 <li class="sidebar-item">
-                                    <a class="sidebar-link" href="">
+                                    <a class="sidebar-link" href="{% url 'inventory:vehicle' %}">
                                         <i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add a Vehicle</span>
                                     </a>
                                 </li>

@@ -4,5 +4,6 @@ from inventory import views
 
 app_name = 'inventory'
 urlpatterns = [
-    path('', views.view_inventory, name='overview')
+    path('', views.view_inventory, name='overview'),
+    path('vehicle/', views.view_vehicle, name='vehicle'),
 ]

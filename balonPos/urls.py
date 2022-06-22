@@ -18,6 +18,7 @@ from django.urls import path, include
 from users.views import view_login, view_logout
 
 urlpatterns = [
+    path("select2/", include("django_select2.urls")),
     path('', view_login, name='login'),
     path('logout/', view_logout, name='logout'),
     path('inventory/', include('inventory.urls')),

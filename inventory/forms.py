@@ -6,6 +6,7 @@ from django import forms
 
 class VehicleForm(forms.ModelForm):
     stock = forms.IntegerField(help_text="The stock number of the vehicle.", disabled=True, required=False)
+    disclosures = forms.CharField(help_text="Disclosures are shown on bill of sale.", required=False)
 
     def __init__(self, *args, **kwargs):
         super(VehicleForm, self).__init__(*args, **kwargs)

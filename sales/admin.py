@@ -1,3 +1,5 @@
 from django.contrib import admin
+from sales.models import PurchaseOrder, SalesOrder
 
-# Register your models here.
+admin.site.register(PurchaseOrder)
+admin.site.register(SalesOrder)

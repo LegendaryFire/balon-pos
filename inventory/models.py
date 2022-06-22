@@ -42,8 +42,8 @@ class Vehicle(models.Model):
     body_type = models.CharField(max_length=20, null=True, blank=True, verbose_name='Body Type')
     engine_type = models.CharField(choices=engine_choices, default=GAS, max_length=8, verbose_name='Engine Type')
 
-    pickup_location = models.TextField(null=True, blank=True, verbose_name="Pickup Location")
-    disclosures = models.TextField(null=True, blank=True, verbose_name="Disclosures")
+    pickup_location = models.CharField(max_length=128, null=True, blank=True, verbose_name="Pickup Location")
+    disclosures = models.CharField(max_length=128, null=True, blank=True, verbose_name="Disclosures")
 
     def __str__(self):
         return '%d %s %s %s - %s' % (self.year, self.make, self.model, self.trim, self.vin[-6:])

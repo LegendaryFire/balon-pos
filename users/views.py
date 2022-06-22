@@ -24,7 +24,7 @@ def view_login(request):
 
         if user is not None:  # If the user credentials are valid.
             login(request, user)
-            messages.info(request, f"Welcome back, {user.first_name}.")
+            messages.info(request, f"Welcome back, {user.username if not user.first_name else user.first_name}.")
             return redirect_user(request, user)  # Check user permissions and redirect.
         else:
             messages.error(request, "Your username and password didn't match. Please try again.")

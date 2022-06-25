@@ -23,6 +23,7 @@ class PurchaseForm(forms.ModelForm):
 
         self.helper = FormHelper(self)
         self.helper.form_tag = False
+        self.helper.include_media = False
         self.helper.layout = Layout(
             HTML("<h4 class=\"text-muted mt-3\">Seller Information</h4><hr/>"),
             Row(

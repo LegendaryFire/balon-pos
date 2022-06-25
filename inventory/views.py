@@ -1,10 +1,13 @@
+from django.http import HttpResponse
 from django.shortcuts import render
 from inventory.forms import VehicleForm
+from inventory.models import Vehicle
 from sales.forms import PurchaseForm
 
 
 def view_inventory(request):
-    return render(request, 'inventory/overview.html')
+    context = {}
+    return render(request, 'inventory/overview.html', context)
 
 
 def view_vehicle(request):

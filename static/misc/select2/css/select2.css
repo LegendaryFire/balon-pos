@@ -1,0 +1,9 @@
+/* This fixes the width of a select2 element inside a form. */
+label, span.select2 {
+    width: 100% !important;
+}
+
+/* This fixes the issues regarding select2 being inside a Bootstrap modal. */
+.select2-container--open {
+    z-index: 9999999
+}

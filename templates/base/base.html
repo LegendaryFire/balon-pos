@@ -73,8 +73,8 @@
                             {% endif %}
 
                             {% if perms.inventory.add_vehicle %}
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="{% url 'inventory:vehicle' %}">
+                                <li class="sidebar-item {% if app_name == 'inventory' and url_name == 'add_vehicle' %}active{% endif %}">
+                                    <a class="sidebar-link" href="{% url 'inventory:add_vehicle' %}">
                                         <i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add a Vehicle</span>
                                     </a>
                                 </li>

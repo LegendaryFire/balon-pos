@@ -22,7 +22,11 @@
     <div class="card">
         <div class="card-header">
             <h5 class="card-title">
-                Add a Vehicle
+                {% with request.resolver_match.url_name as url_name %}
+                    {% if url_name == 'add_vehicle' %}Add a Vehicle{% endif %}
+                    {% if url_name == 'edit_vehicle' %}Edit a Vehicle{% endif %}
+                    {% if url_name == 'sell_vehicle' %}Sell a Vehicle{% endif %}
+                {% endwith %}
             </h5>
             <h6 class="card-subtitle text-muted">Any changes made must be saved.</h6>
         </div>
@@ -30,7 +34,7 @@
         <div class="card-body">
             <ul class="nav nav-pills nav-fill" id="inventoryTab" role="tablist">
                 <li class="nav-item" role="presentation">
-                    <button class="btn btn-lg btn-outline-success active" style="width: 100%;" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="true">Vehicle</button>
+                    <button class="btn btn-lg btn-outline-success active" id="vehicle-tab" data-bs-toggle="tab" data-bs-target="#vehicle" type="button" role="tab" aria-controls="vehicle" aria-selected="true">Vehicle</button>
                 </li>
                 <li class="nav-item mx-2" role="presentation">
                     <button class="btn btn-lg btn-outline-success" id="purchase-tab" data-bs-toggle="tab" data-bs-target="#purchase" type="button" role="tab" aria-controls="purchase" aria-selected="false">Purchase</button>

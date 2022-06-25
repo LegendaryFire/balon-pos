@@ -7,7 +7,15 @@
     <script type="text/javascript" charset="utf8" src="{% static '/ajax_datatable/js/utils.js' %}"></script>
     <script type="text/javascript" charset="utf8" src="{% static 'base/js/datatables.js' %}"></script>
 	<link href="{% static 'base/css/datatables.css' %}" rel="stylesheet">
-
+    <!-- Used for datatable action icon -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/MaterialDesign-Webfont/6.7.96/css/materialdesignicons.min.css" integrity="sha512-q0UoFEi8iIvFQbO/RkDgp3TtGAu2pqYHezvn92tjOq09vvPOxgw4GHN3aomT9RtNZeOuZHIoSPK9I9bEXT3FYA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <!-- Page specific styling -->
+    <style>
+        #actionDropdown {
+            padding: 0rem 0.15rem 0rem 0.1rem;
+            font-size: 1rem;
+        }
+    </style>
 {% endblock template_head %}
 
 {% block content %}

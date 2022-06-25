@@ -29,6 +29,10 @@ class InventoryTableView(AjaxDatatableView):
             'title': 'Days',
             'visible': True,
         }, {
+            'name': 'action',
+            'title': 'Action',
+            'placeholder': True,
+        }, {
             'name': 'make',
             'searchable': True,
             'orderable': False,
@@ -59,13 +63,27 @@ class InventoryTableView(AjaxDatatableView):
         else:
             row['vin'] = 'Unknown'
 
+        # Customize mileage column. Format the integer, and add a unit of measurement.
         if obj.mileage:
             row['mileage'] = f'{intcomma(obj.mileage)}{obj.mileage_units}'
         else:
             row['mileage'] = 'Unknown'
 
+        # Customize the purchase date column, calculate how many days it's been in inventory.
         if obj.purchaseorder:
             po = obj.purchaseorder
             row['purchase_date'] = f'{(datetime.date.today() - obj.purchaseorder.purchase_date).days}'
         else:
             row['purchase_date'] = 'Unknown'
+
+        # Customize the action column. Create a dropdown menu allowing options on the unit.
+        row['action'] = f"""
+        <div class="dropdown">
+            <button class="btn btn-success action" type="button" id="actionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                <i class="mdi mdi-arrow-down" aria-hidden="true"></i>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="actionDropdown">
+                <li><a class="dropdown-item" href="vehicle/edit/{obj.stock}">Edit Vehicle</a></li>
+            </ul>
+        </div>
+        """

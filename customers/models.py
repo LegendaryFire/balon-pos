@@ -13,3 +13,6 @@ class Customer(models.Model):
     email_address = models.EmailField(null=True, blank=True, verbose_name='Email Address')
     gst_number = models.CharField(max_length=50, null=True, blank=True, verbose_name='GST Number')
     notes = models.CharField(max_length=254, null=True, blank=True, verbose_name='Additional Information')
+
+    def __str__(self):
+        return f'{self.first_name} {self.last_name}'

@@ -14,6 +14,7 @@ class PurchaseOrder(models.Model):
     asking_price = models.DecimalField(max_digits=8, decimal_places=2, default=0.0, verbose_name="Asking Price")
     bill_of_sale = models.ImageField(null=True, blank=True, verbose_name="Bill of Sale")
     sales_person = models.ForeignKey('users.User', on_delete=models.DO_NOTHING, verbose_name="Sales Person")
+    vehicle = models.OneToOneField('inventory.Vehicle', on_delete=models.CASCADE, verbose_name="Vehicle")
 
 
 class SalesOrder(models.Model):
@@ -23,9 +24,10 @@ class SalesOrder(models.Model):
     pst = models.DecimalField(max_digits=8, decimal_places=2, default=0.0, verbose_name="PST Charged")
     gst = models.DecimalField(max_digits=8, decimal_places=2, default=0.0, verbose_name="GST Charged")
     method = models.CharField(max_length=64, null=True, blank=True, verbose_name="Payment Method")
-    notes = models.CharField(max_length=64, verbose_name="Payment Notes")
+    notes = models.CharField(max_length=64, null=True, blank=True, verbose_name="Payment Notes")
     sale_mileage = models.IntegerField(null=False, blank=False, default=0, verbose_name='Sale Mileage')
     sale_date = models.DateField(default=date.today, verbose_name="Date Sold")
     paid_date = models.DateField(default=None, null=True, blank=True, verbose_name="Date Paid")
     bill_of_sale = models.ImageField(null=True, blank=True, verbose_name="Bill of Sale")
     sales_person = models.ForeignKey('users.User', on_delete=models.DO_NOTHING, verbose_name="Sales Person")
+    vehicle = models.OneToOneField('inventory.Vehicle', on_delete=models.CASCADE, verbose_name="Vehicle")

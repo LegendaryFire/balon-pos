@@ -46,8 +46,5 @@ class Vehicle(models.Model):
     pickup_location = models.CharField(max_length=128, null=True, blank=True, verbose_name="Pickup Location")
     disclosures = models.CharField(max_length=128, null=True, blank=True, verbose_name="Disclosures")
 
-    purchase_order = models.OneToOneField(PurchaseOrder, on_delete=models.CASCADE, verbose_name="Purchase Order")
-    sales_order = models.OneToOneField(SalesOrder, null=True, blank=True, on_delete=models.CASCADE, verbose_name="Sales Order")
-
     def __str__(self):
         return '%d %s %s %s - %s' % (self.year, self.make, self.model, self.trim, self.vin[-6:])

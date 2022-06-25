@@ -39,7 +39,7 @@
                     <button class="btn btn-lg btn-outline-success" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sale" type="button" role="tab" aria-controls="sale" aria-selected="false">Sale</button>
                 </li>
             </ul>
-            <form id="vehicle_form" method='post'>
+            <form id="vehicle_form" method='post' novalidate>
                 <div class="tab-content" id="inventoryTabContent">
                     <div class="tab-pane fade show active" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
                         {% crispy vehicle_form %}
@@ -48,7 +48,7 @@
                         {% crispy purchase_form %}
                     </div>
                     <div class="tab-pane fade" id="sale" role="tabpanel" aria-labelledby="sales-tab">
-
+                        {% crispy sales_form %}
                     </div>
                 </div>
                 <button type="submit" formmethod="post" class="btn btn-primary">Save Changes</button>

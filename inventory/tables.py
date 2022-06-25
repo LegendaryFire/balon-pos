@@ -1,3 +1,4 @@
+import datetime
 from django.contrib.humanize.templatetags.humanize import intcomma
 from ajax_datatable.views import AjaxDatatableView
 from inventory.models import Vehicle
@@ -21,6 +22,11 @@ class InventoryTableView(AjaxDatatableView):
         }, {
             'name': 'mileage',
             'title': 'Mileage',
+            'visible': True,
+        }, {
+            'name': 'purchase_date',
+            'foreign_field': 'purchaseorder__purchase_date',
+            'title': 'Days',
             'visible': True,
         }, {
             'name': 'make',
@@ -55,3 +61,11 @@ class InventoryTableView(AjaxDatatableView):
 
         if obj.mileage:
             row['mileage'] = f'{intcomma(obj.mileage)}{obj.mileage_units}'
+        else:
+            row['mileage'] = 'Unknown'
+
+        if obj.purchaseorder:
+            po = obj.purchaseorder
+            row['purchase_date'] = f'{(datetime.date.today() - obj.purchaseorder.purchase_date).days}'
+        else:
+            row['purchase_date'] = 'Unknown'

@@ -11,7 +11,7 @@ class VehicleForm(forms.ModelForm):
     def __init__(self, *args, **kwargs):
         super(VehicleForm, self).__init__(*args, **kwargs)
         self.helper = FormHelper(self)
-        self.helper.form_tag = True
+        self.helper.form_tag = False
         self.helper.layout = Layout(
             HTML('<h4 class="text-muted mt-3">Description</h4><hr/>'),
             Row(

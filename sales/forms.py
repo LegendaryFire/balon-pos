@@ -52,10 +52,10 @@ class PurchaseForm(forms.ModelForm):
                 Column(PrependedText("total", '$'), css_class='col-6 col-md-3'),
             ),
             Row(
+                Column(PrependedText("asking_price", '$'), css_class='col-6 col-md-3'),
                 Column("method", css_class='col-6 col-md-3'),
                 Column("notes", css_class='col-6 col-md-3'),
                 Column("purchase_date", css_class='col-6 col-md-3'),
-                Column(PrependedText("asking_price", '$'), css_class='col-6 col-md-3'),
             ),
             Row(
                 Column("bill_of_sale", css_class='col-12, col-md-6'),

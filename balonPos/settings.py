@@ -41,7 +41,6 @@ INSTALLED_APPS = [
     'crispy_forms',
     'crispy_bootstrap5',
     'django_select2',
-    'django_tables2',
     'ajax_datatable',
     'users',
     'inventory',

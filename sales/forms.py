@@ -37,7 +37,7 @@ class PurchaseForm(forms.ModelForm):
                                 css_class="btn btn-sm btn-outline-primary form-control",
                                 css_id='id_add_customer',
                                 data_bs_toggle="modal",
-                                data_bs_target="#modalCustomer"
+                                data_bs_target="#customerModal"
                             ),
                             css_class='mb-3'
                         ),
@@ -95,7 +95,7 @@ class SaleForm(forms.ModelForm):
                                 css_class="btn btn-sm btn-outline-primary form-control",
                                 css_id='id_add_customer',
                                 data_bs_toggle="modal",
-                                data_bs_target="#modalCustomer"
+                                data_bs_target="#customerModal"
                             ),
                             css_class='mb-3'
                         ),

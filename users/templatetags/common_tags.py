@@ -29,5 +29,3 @@ def message_to_notyf(value, x, y):
     }
 
     return f'<script>window.notyf.open({str(data)})</script>'
-
-

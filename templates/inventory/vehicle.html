@@ -10,6 +10,8 @@
     <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
     <script src="/static/django_select2/django_select2.js"></script>
     <script src="/static/misc/select2/js/autofocus.js"></script>
+    <!-- Axios for AJAX calls -->
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
     <!-- Page specific styling -->
     <style>
         .nav-item button {
@@ -59,8 +61,55 @@
             </form>
         </div>
     </div>
+
+    <div class="modal fade" id="customerModal" tabindex="-1" aria-labelledby="customerModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="customerModalLabel">Add a New Customer</h5>
+                    <button type="button" id="customerClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form id="customer_form" method='post'>
+                    <div class="modal-body">
+                        {% crispy customer_form %}
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                        <button type="submit" formmethod="post" class="btn btn-primary">Add Customer</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 {% endblock content %}
 
 {% block template_body %}
-
+    <script>
+        let customer_form = document.querySelector("#customer_form")
+        let customer_close = document.querySelector("#customerClose")
+        customer_form.addEventListener('submit', function(event) {
+            event.preventDefault();
+            let data = new FormData(this);
+            axios.post('{% url 'inventory:add_vehicle' %}', data)
+                .then(function (response) {
+                    if (response.status === 200) {
+                        customer_form.reset();
+                        customer_close.click();
+                        window.notyf.open({
+                            'type': 'success',
+                            'message': 'Success! Customer has been added.',
+                            'position': {'x': 'right', 'y': 'top'}
+                        });
+                    }
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    window.notyf.open({
+                        'type': 'error',
+                        'message': "Error saving customer. Please contact administrator.",
+                        'position': {'x': 'right', 'y': 'top'}
+                    });
+                });
+        });
+    </script>
 {% endblock template_body %}

@@ -50,6 +50,9 @@ class InventoryTableView(AjaxDatatableView):
         },
     ]
 
+    def get_initial_queryset(self, request=None):
+        return Vehicle.objects.filter(salesorder__isnull=True)
+
     def customize_row(self, row, obj):
         # Customize vehicle column.
         if obj.year and obj.make and obj.model and obj.trim:

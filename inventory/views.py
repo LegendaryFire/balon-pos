@@ -22,12 +22,6 @@ def view_vehicle(request, stock=None):
         EDIT = 'edit_vehicle'
         SELL = 'sell_vehicle'
 
-    # Handle the create customer proportion of the vehicle page.
-    customer_form = CustomerForm(request.POST or None)
-    if request.method == "POST" and customer_form.is_valid():
-        customer_form.save()
-        return HttpResponse(200)
-
     # Check to see if a specific stock number was requested. If so, pull the vehicle data.
     vehicle = None
     purchase_order = None
@@ -62,7 +56,7 @@ def view_vehicle(request, stock=None):
         'vehicle_form': vehicle_form,
         'purchase_form': purchase_form,
         'sales_form': sales_form,
-        'customer_form': customer_form,
+        'customer_form': CustomerForm(request.POST or None),
     }
 
     if request.method != 'POST':

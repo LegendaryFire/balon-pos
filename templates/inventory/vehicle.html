@@ -90,7 +90,7 @@
         customer_form.addEventListener('submit', function(event) {
             event.preventDefault();
             let data = new FormData(this);
-            axios.post('{% url 'inventory:add_vehicle' %}', data)
+            axios.post('{% url 'customers:ajaxAddCustomer' %}', data)
                 .then(function (response) {
                     if (response.status === 200) {
                         customer_form.reset();

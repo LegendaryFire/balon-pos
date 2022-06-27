@@ -38,4 +38,4 @@ def redirect_user(request, user):
     Redirects the user to a page in which permission is granted for the particular user.
     """
     if user.has_perm('inventory.view_vehicle'):
-        return redirect('inventory:overview')
+        return redirect('inventory:viewOverview')

@@ -65,16 +65,16 @@
                                 </li>
 
                             {% if perms.inventory.view_vehicle %}
-                                <li class="sidebar-item {% if app_name == 'inventory' and url_name == 'overview' %}active{% endif %}">
-                                    <a class="sidebar-link" href="{% url 'inventory:overview' %}">
+                                <li class="sidebar-item {% if app_name == 'inventory' and url_name == 'viewOverview' %}active{% endif %}">
+                                    <a class="sidebar-link" href="{% url 'inventory:viewOverview' %}">
                                         <i class="align-middle" data-feather="truck"></i> <span class="align-middle">Inventory</span>
                                     </a>
                                 </li>
                             {% endif %}
 
                             {% if perms.inventory.add_vehicle %}
-                                <li class="sidebar-item {% if app_name == 'inventory' and url_name == 'add_vehicle' %}active{% endif %}">
-                                    <a class="sidebar-link" href="{% url 'inventory:add_vehicle' %}">
+                                <li class="sidebar-item {% if app_name == 'inventory' and url_name == 'viewAddVehicle' %}active{% endif %}">
+                                    <a class="sidebar-link" href="{% url 'inventory:viewAddVehicle' %}">
                                         <i class="align-middle" data-feather="plus-square"></i> <span class="align-middle">Add a Vehicle</span>
                                     </a>
                                 </li>

@@ -18,9 +18,9 @@ def view_vehicle(request, stock=None):
         """
         Enumerator class used to distinguish the purpose of the vehicle view.
         """
-        ADD = 'add_vehicle'
-        EDIT = 'edit_vehicle'
-        SELL = 'sell_vehicle'
+        ADD_VEHICLE = 'viewAddVehicle'
+        EDIT_VEHICLE = 'viewEditVehicle'
+        SELL_VEHICLE = 'viewSellVehicle'
 
     # Check to see if a specific stock number was requested. If so, pull the vehicle data.
     vehicle = None
@@ -29,10 +29,8 @@ def view_vehicle(request, stock=None):
 
     if stock:
         vehicle = get_object_or_404(Vehicle, pk=stock)
-        if hasattr(vehicle, 'purchaseorder'):
-            purchase_order = vehicle.purchaseorder
-        if hasattr(vehicle, 'salesorder'):
-            sales_order = vehicle.salesorder
+        purchase_order = getattr(vehicle, 'purchaseorder', None)
+        sales_order = getattr(vehicle, 'salesorder', None)
 
     vehicle_form = VehicleForm(request.POST or None, instance=vehicle, prefix="vehicle")
     purchase_form = PurchaseForm(request.POST or None, instance=purchase_order, prefix="purchase")
@@ -41,12 +39,12 @@ def view_vehicle(request, stock=None):
     # Check to see what our purpose is. Are we here to add, edit or sell a vehicle.
     purpose = resolve(request.path_info).url_name
     match purpose:
-        case URLNames.EDIT:
-            # Disable all sale form fields.
+        case URLNames.EDIT_VEHICLE:
+            # Editing does not allow modifications to the purchaser.
             for field in sales_form.fields:
                 sales_form.fields[field].disabled = True
-        case URLNames.SELL:
-            # Disable all vehicle & purchase form fields.
+        case URLNames.SELL_VEHICLE:
+            # Selling doesn't allow modification to the vehicle or seller.
             for field in vehicle_form.fields:
                 vehicle_form.fields[field].disabled = True
             for field in purchase_form.fields:
@@ -105,20 +103,13 @@ def view_vehicle(request, stock=None):
 
         sales_order.save()
 
+    # Notify the user of any changes once saved.
     match purpose:
-        case URLNames.ADD:
-            messages.success(
-                request,
-                f'{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim} - {vehicle.vin[-6:]} added.'
-            )
-        case URLNames.EDIT:
-            messages.success(
-                request,
-                f'Changes to {vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim} - {vehicle.vin[-6:]} saved.'
-            )
-        case URLNames.SELL:
-            messages.success(
-                request,
-                f'{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim} - {vehicle.vin[-6:]} sold to {sales_order.purchaser.first_name} {sales_order.purchaser.last_name}.'
-            )
-    return redirect('inventory:overview')
+        case URLNames.ADD_VEHICLE:
+            messages.success(request, f'{vehicle} added.')
+        case URLNames.EDIT_VEHICLE:
+            messages.success(request, f'Changes to {vehicle} saved.')
+        case URLNames.SELL_VEHICLE:
+            messages.success(request, f'{vehicle} sold to {sales_order.purchaser.first_name} {sales_order.purchaser.last_name}.')
+
+    return redirect('inventory:viewOverview')

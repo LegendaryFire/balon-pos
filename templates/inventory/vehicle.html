@@ -25,9 +25,9 @@
         <div class="card-header">
             <h5 class="card-title">
                 {% with request.resolver_match.url_name as url_name %}
-                    {% if url_name == 'add_vehicle' %}Add a Vehicle{% endif %}
-                    {% if url_name == 'edit_vehicle' %}Edit a Vehicle{% endif %}
-                    {% if url_name == 'sell_vehicle' %}Sell a Vehicle{% endif %}
+                    {% if url_name == 'viewAddVehicle' %}Add a Vehicle{% endif %}
+                    {% if url_name == 'viewEditVehicle' %}Edit a Vehicle{% endif %}
+                    {% if url_name == 'viewSellVehicle' %}Sell a Vehicle{% endif %}
                 {% endwith %}
             </h5>
             <h6 class="card-subtitle text-muted">Any changes made must be saved.</h6>
@@ -45,7 +45,7 @@
                     <button class="btn btn-lg btn-outline-success" id="sales-tab" data-bs-toggle="tab" data-bs-target="#sale" type="button" role="tab" aria-controls="sale" aria-selected="false">Sale</button>
                 </li>
             </ul>
-            <form id="vehicle_form" method='post' novalidate>
+            <form id="vehicleForm" method='post' novalidate>
                 <div class="tab-content" id="inventoryTabContent">
                     <div class="tab-pane fade show active" id="vehicle" role="tabpanel" aria-labelledby="vehicle-tab">
                         {% crispy vehicle_form %}
@@ -69,7 +69,7 @@
                     <h5 class="modal-title" id="customerModalLabel">Add a New Customer</h5>
                     <button type="button" id="customerClose" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
-                <form id="customer_form" method='post'>
+                <form id="customerForm" method='post'>
                     <div class="modal-body">
                         {% crispy customer_form %}
                     </div>
@@ -85,7 +85,7 @@
 
 {% block template_body %}
     <script>
-        let customer_form = document.querySelector("#customer_form")
+        let customer_form = document.querySelector("#customerForm")
         let customer_close = document.querySelector("#customerClose")
         customer_form.addEventListener('submit', function(event) {
             event.preventDefault();

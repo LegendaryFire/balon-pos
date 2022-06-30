@@ -4,6 +4,7 @@ from django.urls import resolve
 from customers.forms import CustomerForm
 from inventory.forms import VehicleForm
 from inventory.models import Vehicle
+from registrations.models import Registration
 from sales.forms import PurchaseForm, SaleForm
 
 
@@ -101,6 +102,13 @@ def view_vehicle(request, stock=None):
             sales_order.vehicle = vehicle
 
         sales_order.save()
+
+        # Every sales order must have a registration tied to it. If one already exists, don't change it.
+        registration = getattr(sales_order, 'registration', None)
+        if not registration:
+            registration = Registration()
+            registration.sales_order = sales_order
+            registration.save()
 
     # Notify the user of any changes once saved.
     match purpose:

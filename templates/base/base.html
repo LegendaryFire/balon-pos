@@ -94,8 +94,8 @@
                                     </a>
                                 </li>
 
-                                <li class="sidebar-item">
-                                    <a class="sidebar-link" href="">
+                                <li class="sidebar-item {% if app_name == 'registrations' and url_name == 'viewOverview' %}active{% endif %}">
+                                    <a class="sidebar-link" href="{% url 'registrations:viewOverview' %}">
                                         <i class="align-middle" data-feather="paperclip"></i> <span class="align-middle">Registrations</span>
                                     </a>
                                 </li>

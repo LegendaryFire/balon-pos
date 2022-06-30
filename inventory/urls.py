@@ -4,6 +4,7 @@ from inventory import views, tables
 app_name = 'inventory'
 urlpatterns = [
     path('tables/inventory', tables.InventoryTableView.as_view(), name="tableInventory"),
+    path('tables/sold', tables.SoldTableView.as_view(), name="tableSold"),
     path('', views.view_inventory, name='viewOverview'),
     path('vehicle/add/', views.view_vehicle, name='viewAddVehicle'),
     path('vehicle/edit/<int:stock>/', views.view_vehicle, name='viewEditVehicle'),

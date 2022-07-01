@@ -21,6 +21,21 @@ def mark_requested(pks):
         reg.save()
 
 
+def mark_unrequested(pks):
+    """
+    A function to mark registrations unrequested.
+    :param pks: Either a string or integer with a single primary key, or a list of them.
+    :return: Returns none.
+    """
+    if type(pks) in (str, int):
+        pks = [pks, ]
+
+    for pk in pks:
+        reg = get_object_or_404(Registration, pk=int(pk))
+        reg.date_requested = None
+        reg.save()
+
+
 def mark_received(pks):
     """
     A function to mark registrations received as of the current date.
@@ -36,6 +51,21 @@ def mark_received(pks):
         reg.save()
 
 
+def mark_unreceived(pks):
+    """
+    A function to mark registrations unreceived.
+    :param pks: Either a string or integer with a single primary key, or a list of them.
+    :return: Returns none.
+    """
+    if type(pks) in (str, int):
+        pks = [pks, ]
+
+    for pk in pks:
+        reg = get_object_or_404(Registration, pk=int(pk))
+        reg.date_received = None
+        reg.save()
+
+
 def action_mark_requested(request, pk):
     """
     A view to mark a registration as requested.
@@ -48,6 +78,18 @@ def action_mark_requested(request, pk):
     return redirect('registrations:viewOverview')  # Redirect to the overview page.
 
 
+def action_mark_unrequested(request, pk):
+    """
+    A view to mark a registration as unrequested.
+    :param request: The request.
+    :param pk: The primary key of the registration to mark unrequested.
+    :return: Returns a redirect to the registration overview page.
+    """
+    mark_unrequested(pk)
+    messages.success(request, 'Registration marked as unrequested successfully.')
+    return redirect('registrations:viewOverview')  # Redirect to the overview page.
+
+
 def action_mark_received(request, pk):
     """
     A view to mark a registration as received.
@@ -57,6 +99,18 @@ def action_mark_received(request, pk):
     """
     mark_received(pk)
     messages.success(request, 'Registration marked as received successfully.')
+    return redirect('registrations:viewOverview')  # Redirect to the overview page.
+
+
+def action_mark_unreceived(request, pk):
+    """
+    A view to mark a registration as unreceived.
+    :param request: The request.
+    :param pk: The primary key of the registration to mark unreceived.
+    :return: Returns a redirect to the registration overview page.
+    """
+    mark_unreceived(pk)
+    messages.success(request, 'Registration marked as unreceived successfully.')
     return redirect('registrations:viewOverview')  # Redirect to the overview page.
 
 

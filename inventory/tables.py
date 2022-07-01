@@ -31,6 +31,8 @@ class InventoryTableView(AjaxDatatableView):
         }, {
             'name': 'action',
             'title': 'Action',
+            'searchable': False,
+            'orderable': False,
             'placeholder': True,
         }, {
             'name': 'make',
@@ -127,6 +129,8 @@ class SoldTableView(AjaxDatatableView):
         }, {
             'name': 'action',
             'title': 'Action',
+            'searchable': False,
+            'orderable': False,
             'placeholder': True,
         }, {
             'name': 'make',

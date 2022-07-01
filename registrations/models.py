@@ -8,3 +8,8 @@ class Registration(models.Model):
     date_received = models.DateField(default=None, null=True, blank=True, verbose_name="Date Received")
     scan = models.ImageField(null=True, blank=True, verbose_name="Registration", upload_to="registrations/")
     sales_order = models.OneToOneField('sales.SalesOrder', on_delete=models.CASCADE, verbose_name="Sales Order")
+
+    def __str__(self):
+        if hasattr(self, 'sales_order'):
+            vehicle = self.sales_order.vehicle
+            return f'{vehicle.year} {vehicle.make} {vehicle.model} {vehicle.trim} - {vehicle.vin[-6:]}'

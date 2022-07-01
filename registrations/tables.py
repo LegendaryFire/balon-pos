@@ -27,8 +27,14 @@ class OutstandingRegistrationTableView(AjaxDatatableView):
         }, {
             'name': 'date_requested',
             'title': 'Requested',
+            'visible': True,
+        }, {
+            'name': 'action',
+            'title': 'Action',
+            'searchable': False,
+            'orderable': False,
             'placeholder': True,
-        },
+        }
     ]
 
     def get_initial_queryset(self, request=None):
@@ -50,20 +56,25 @@ class OutstandingRegistrationTableView(AjaxDatatableView):
         else:
             row['vin'] = 'Unknown'
 
-        # Customize mileage column. Format the integer, and add a unit of measurement.
+        # Customize date requested column, save the status since we will use it in our action column.
+        requested = False
         if obj.date_requested:
             row['date_requested'] = f'{(datetime.date.today() - obj.date_requested).days} Days'
+            requested = True
         else:
             row['date_requested'] = 'Not Requested'
 
-        # Customize the action column. Create a dropdown menu allowing options on the unit.
+        # Customize the action column. Create a dropdown menu allowing options on the registration.
         row['action'] = f"""
         <div class="dropdown">
             <button class="btn btn-success action" type="button" id="actionDropdown" data-bs-toggle="dropdown" aria-expanded="false">
                 <i class="mdi mdi-arrow-down" aria-hidden="true"></i>
             </button>
             <ul class="dropdown-menu" aria-labelledby="actionDropdown">
-                <li><a class="dropdown-item" href="vehicle/edit/">Edit Vehicle</a></li>
+                {f'<li><a class="dropdown-item" href="action/mark/requested/{obj.pk}">Mark Requested</a></li>' if not requested else ''}
+                <li><a class="dropdown-item" href="action/mark/received/{obj.pk}">Mark Received</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="edit/{obj.pk}">Edit Registration</a></li>
             </ul>
         </div>
         """

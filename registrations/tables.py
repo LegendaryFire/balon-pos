@@ -52,7 +52,7 @@ class OutstandingRegistrationTableView(AjaxDatatableView):
 
         # Customize mileage column. Format the integer, and add a unit of measurement.
         if obj.date_requested:
-            row['date_requested'] = f'{(datetime.date.today() - obj.date_requested).days}'
+            row['date_requested'] = f'{(datetime.date.today() - obj.date_requested).days} Days'
         else:
             row['date_requested'] = 'Not Requested'
 

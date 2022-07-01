@@ -29,3 +29,14 @@ def message_to_notyf(value, x, y):
     }
 
     return f'<script>window.notyf.open({str(data)})</script>'
+
+
+@register.filter
+def get_item(value, key):
+    """
+    Gets an item from a dictionary.
+    :param value: The dictionary to get an item from.
+    :param key: The key to get an item from.
+    :return: Returns the item from the given key.
+    """
+    return value.get(key)
